@@ -4,7 +4,7 @@ from redis import StrictRedis
 from flask_wtf import CSRFProtect
 from flask_session import Session
 from flask_script import Manager
-
+from flask_migrate import Migrate,MigrateCommand
 
 
 app = Flask(__name__)
@@ -41,6 +41,9 @@ CSRFProtect(app)
 Session(app)
 #6.设置Manage
 manage = Manager(app)
+# 设置migrate
+Migrate(app,db)
+manage.add_command("db",MigrateCommand)
 
 @app.route('/')
 def index():
