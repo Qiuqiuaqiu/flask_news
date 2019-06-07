@@ -1,5 +1,5 @@
 from redis import StrictRedis
-
+import logging
 
 class Config(object):
     SECRET_KEY = "123456"
@@ -22,13 +22,15 @@ class Config(object):
     PERMANENT_SESSION_LIFETIME = 86400*2
 
 class DevelopConfig(Config):
-    pass
+    LOG_LEVEL = logging.DEBUG
+
 class ProductConfig(Config):
-    pass
+    LOG_LEVEL = logging.ERROR
+
 class TestingConfig(Config):
     pass
 
-config = {
+configs = {
     "develop" : DevelopConfig,
     "product" : ProductConfig,
     "testing" : TestingConfig
